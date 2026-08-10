@@ -7,12 +7,10 @@
 //
 
 import SwiftUI
-import AgenticOrdeingKMM
 
 struct PromoProductCardView: View {
 
-    let props: ProductProps
-    var onAccept: (() -> Void)? = nil
+    let props: APIProduct
 
     private let yellow = Color(red: 1.0, green: 0.78, blue: 0.17)   // #FFC72C
     private let darkYellow = Color(red: 0.48, green: 0.32, blue: 0.0) // #7A5200
@@ -58,30 +56,19 @@ struct PromoProductCardView: View {
 
                     HStack(alignment: .center, spacing: 8) {
                         // Strikethrough original price
-                        let originalPrice = props.productPrice.price?.doubleValue ?? 0.0
+                        let originalPrice = props.productPrice.price ?? 0.0
                         Text("\(props.productPrice.currency)\(String(format: "%.2f", originalPrice))")
                             .font(.system(size: 13))
                             .foregroundColor(.gray)
                             .strikethrough(true, color: .gray)
 
                         // Discounted price
-                        let discounted = props.productPrice.discountedPrice?.doubleValue ?? originalPrice
+                        let discounted = props.productPrice.discountedPrice ?? originalPrice
                         Text("\(props.productPrice.currency)\(String(format: "%.2f", discounted))")
                             .font(.system(size: 15, weight: .bold))
                             .foregroundColor(orange)
 
                         Spacer()
-
-                        // Accept Button
-                        Button(action: { onAccept?() }) {
-                            Text("Accept")
-                                .font(.system(size: 14, weight: .semibold))
-                                .foregroundColor(.white)
-                                .padding(.horizontal, 16)
-                                .padding(.vertical, 8)
-                                .background(yellow)
-                                .cornerRadius(12)
-                        }
                     }
                 }
                 .padding(.leading, 10)
@@ -96,7 +83,7 @@ struct PromoProductCardView: View {
             )
             .padding(.top, 12) // space for badge overlap
 
-            // MARK: Offer Badge (top-left overlay)
+            // MARK: Offer Badge
             HStack(spacing: 4) {
                 Image(systemName: "tag.fill")
                     .font(.system(size: 13))
@@ -113,23 +100,10 @@ struct PromoProductCardView: View {
         }
     }
 
-    // Mirror Android URL fix
     private var fixedImageURL: String {
         (props.productImage ?? "").replacingOccurrences(
             of: "https://storage.cloud.google.com/",
             with: "https://storage.googleapis.com/"
         )
     }
-}
-
-#Preview {
-    VStack {
-        Text("PromoProductCardView Preview")
-            .font(.headline)
-            .padding()
-        Text("(Requires real ProductProps from KMM)")
-            .font(.caption)
-            .foregroundColor(.gray)
-    }
-    .padding()
 }

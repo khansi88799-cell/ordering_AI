@@ -2,7 +2,7 @@
 //  OrderChatView.swift
 //  Arch
 //
-//  Created by Rahul Gupta on 24/06/26.
+//  Created by saeed on 24/06/26.
 //  Copyright © 2026 McDonald's. All rights reserved.
 //
 
@@ -48,15 +48,10 @@ struct OrderChatView: View {
                             }
                         }
                     }
-                    
+                    .background(Color(hex: "#FAF9F6"))
+
                     Divider()
-                    
-                    QuickActionsView(viewModel: viewModel) { selected in
-                        viewModel.handleQuickAction(selected)
-                    }
-                    
-                    Divider()
-                    
+
                     ChatInputView(
                         text: $viewModel.inputText,
                         onSend: viewModel.sendMessage
@@ -68,34 +63,18 @@ struct OrderChatView: View {
                         Button {
                             dismiss()
                         } label: {
-                            Image(systemName: "xmark.circle.fill")
-                                .renderingMode(.original)
+                            Image(systemName: "chevron.left")
+                                .font(.system(size: 18, weight: .semibold))
+                                .foregroundColor(Color(hex: "#000000"))
                         }
                     }
                     
                     // Center title
                     ToolbarItem(placement: .principal) {
-                        HStack(spacing: 6) {
-                            Text("McDonald's")
-                                .font(.title3)
-                                .fontWeight(.bold)
-                                .foregroundColor(Color(hex: "#D7262B"))
-                        }
-                    }
-                    // Right side icons
-                    ToolbarItemGroup(placement: .navigationBarTrailing) {
-                        
-                        Button(action: {
-                            print("Cart tapped")
-                        }) {
-                            Image(systemName: "cart")
-                        }
-                        
-                        Button(action: {
-                            print("Profile tapped")
-                        }) {
-                            Image(systemName: "person")
-                        }
+                        Image("myMcdLogo")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(height: 32)
                     }
                 }
                 .toolbarBackground(Color.clear, for: .navigationBar)

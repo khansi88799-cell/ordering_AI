@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		079A2CA496EB4BA9A72A09D4 /* SpeechSynthesizerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E018B638BDA476990259544 /* SpeechSynthesizerManager.swift */; };
+		30A8A09630234D32008B74D9 /* ChatAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A8A09530234D32008B74D9 /* ChatAPIModels.swift */; };
 		30A96BF9301F73B7008FECCA /* AgenticOrder.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30A96BE4301F73B7008FECCA /* AgenticOrder.xcassets */; };
 		30A96BFA301F73B7008FECCA /* ChatInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A96BF0301F73B7008FECCA /* ChatInputView.swift */; };
 		30A96BFB301F73B7008FECCA /* orderCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A96BF1301F73B7008FECCA /* orderCardView.swift */; };
@@ -20,10 +22,12 @@
 		30A96C03301F73B7008FECCA /* PromoProductCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A96BF4301F73B7008FECCA /* PromoProductCardView.swift */; };
 		30A96C04301F73B7008FECCA /* OrderChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A96BF2301F73B7008FECCA /* OrderChatView.swift */; };
 		30A96C05301F73B7008FECCA /* TypingMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A96BF6301F73B7008FECCA /* TypingMessageView.swift */; };
-		30A96C06301F73B7008FECCA /* QuickActionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A96BF5301F73B7008FECCA /* QuickActionsView.swift */; };
 		30A96C07301F73B7008FECCA /* OrderProduct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A96BE8301F73B7008FECCA /* OrderProduct.swift */; };
 		30A96C0A301F7489008FECCA /* AgenticOrdeingKMM.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30A96C09301F7489008FECCA /* AgenticOrdeingKMM.xcframework */; };
 		30A96C0B301F7489008FECCA /* AgenticOrdeingKMM.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 30A96C09301F7489008FECCA /* AgenticOrdeingKMM.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		66FBAA3EF96B49CDBF1ABB18 /* ChatAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBA7D64919304C81BAFCE0BE /* ChatAPIService.swift */; };
+		79ABFD02D82B468AA828B555 /* PaymentDetailsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20E299C55E26446A81FB849F /* PaymentDetailsCard.swift */; };
+		D34A43234A5341688337A839 /* RecommendedProductsCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B3CA18E3624CBF90DEAB96 /* RecommendedProductsCard.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -58,6 +62,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		20E299C55E26446A81FB849F /* PaymentDetailsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentDetailsCard.swift; sourceTree = "<group>"; };
+		31B3CA18E3624CBF90DEAB96 /* RecommendedProductsCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendedProductsCard.swift; sourceTree = "<group>"; };
+		30A8A09530234D32008B74D9 /* ChatAPIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAPIModels.swift; sourceTree = "<group>"; };
 		30A96BB5301F427D008FECCA /* ordering_AI_Assistant.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ordering_AI_Assistant.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30A96BC7301F427F008FECCA /* ordering_AI_AssistantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ordering_AI_AssistantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30A96BD1301F427F008FECCA /* ordering_AI_AssistantUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ordering_AI_AssistantUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,9 +81,10 @@
 		30A96BF2301F73B7008FECCA /* OrderChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderChatView.swift; sourceTree = "<group>"; };
 		30A96BF3301F73B7008FECCA /* ProductCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCardView.swift; sourceTree = "<group>"; };
 		30A96BF4301F73B7008FECCA /* PromoProductCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromoProductCardView.swift; sourceTree = "<group>"; };
-		30A96BF5301F73B7008FECCA /* QuickActionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuickActionsView.swift; sourceTree = "<group>"; };
 		30A96BF6301F73B7008FECCA /* TypingMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingMessageView.swift; sourceTree = "<group>"; };
 		30A96C09301F7489008FECCA /* AgenticOrdeingKMM.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AgenticOrdeingKMM.xcframework; path = "../../../../KMM/Agentic-Ordering-Android/shared/build/XCFrameworks/release/AgenticOrdeingKMM.xcframework"; sourceTree = "<group>"; };
+		8E018B638BDA476990259544 /* SpeechSynthesizerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizerManager.swift; sourceTree = "<group>"; };
+		BBA7D64919304C81BAFCE0BE /* ChatAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAPIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -156,6 +164,7 @@
 		30A96BE9301F73B7008FECCA /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				30A8A09530234D32008B74D9 /* ChatAPIModels.swift */,
 				30A96BE6301F73B7008FECCA /* ChatIntent.swift */,
 				30A96BE7301F73B7008FECCA /* ChatMessage.swift */,
 				30A96BE8301F73B7008FECCA /* OrderProduct.swift */,
@@ -175,6 +184,8 @@
 			children = (
 				30A96BEB301F73B7008FECCA /* ChatViewModel.swift */,
 				30A96BEC301F73B7008FECCA /* SpeechRecognizerManager.swift */,
+				BBA7D64919304C81BAFCE0BE /* ChatAPIService.swift */,
+				8E018B638BDA476990259544 /* SpeechSynthesizerManager.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -189,8 +200,9 @@
 				30A96BF2301F73B7008FECCA /* OrderChatView.swift */,
 				30A96BF3301F73B7008FECCA /* ProductCardView.swift */,
 				30A96BF4301F73B7008FECCA /* PromoProductCardView.swift */,
-				30A96BF5301F73B7008FECCA /* QuickActionsView.swift */,
 				30A96BF6301F73B7008FECCA /* TypingMessageView.swift */,
+				20E299C55E26446A81FB849F /* PaymentDetailsCard.swift */,
+				31B3CA18E3624CBF90DEAB96 /* RecommendedProductsCard.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -369,12 +381,16 @@
 				30A96BFF301F73B7008FECCA /* ChatIntent.swift in Sources */,
 				30A96C00301F73B7008FECCA /* ChatViewModel.swift in Sources */,
 				30A96C01301F73B7008FECCA /* SpeechRecognizerManager.swift in Sources */,
+				30A8A09630234D32008B74D9 /* ChatAPIModels.swift in Sources */,
 				30A96C02301F73B7008FECCA /* ProductCardView.swift in Sources */,
 				30A96C03301F73B7008FECCA /* PromoProductCardView.swift in Sources */,
 				30A96C04301F73B7008FECCA /* OrderChatView.swift in Sources */,
 				30A96C05301F73B7008FECCA /* TypingMessageView.swift in Sources */,
-				30A96C06301F73B7008FECCA /* QuickActionsView.swift in Sources */,
 				30A96C07301F73B7008FECCA /* OrderProduct.swift in Sources */,
+				66FBAA3EF96B49CDBF1ABB18 /* ChatAPIService.swift in Sources */,
+				079A2CA496EB4BA9A72A09D4 /* SpeechSynthesizerManager.swift in Sources */,
+				79ABFD02D82B468AA828B555 /* PaymentDetailsCard.swift in Sources */,
+				D34A43234A5341688337A839 /* RecommendedProductsCard.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -532,9 +548,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = YR9Q69WDBT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to capture audio for speech recognition.";
@@ -567,9 +584,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = YR9Q69WDBT;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "We need access to your microphone to capture audio for speech recognition.";

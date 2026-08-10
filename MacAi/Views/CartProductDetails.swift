@@ -7,15 +7,12 @@
 //
 
 import SwiftUI
-import AgenticOrdeingKMM
 
 // MARK: - View
 
 struct CartProductDetails: View {
 
     var cart: CartDetail
-    var onConfirmed: (() -> Void)? = nil
-    var onAccept: ((ProductProps) -> Void)? = nil
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -24,7 +21,7 @@ struct CartProductDetails: View {
             HStack(spacing: 10) {
                 ZStack {
                     Circle()
-                        .fill(Color.green)
+                        .fill(Color.red)
                         .frame(width: 36, height: 36)
                     Image(systemName: "cart.fill")
                         .foregroundColor(.white)
@@ -61,18 +58,18 @@ struct CartProductDetails: View {
             Divider()
                 .padding(.vertical, 10)
 
-            // MARK: Summary Lines from API (Total, Tax, Subtotal)
+            // MARK: Summary Lines from API (Subtotal, Tax, Total)
             if !cart.summaryLines.isEmpty {
                 ForEach(cart.summaryLines) { line in
-                    let isSubtotal = line.label.lowercased() == "subtotal"
+                    let isTotal = line.label.lowercased() == "total"
                     HStack {
                         Text(line.label)
-                            .font(.system(size: isSubtotal ? 15 : 14, weight: isSubtotal ? .bold : .regular))
-                            .foregroundColor(isSubtotal ? .black : .gray)
+                            .font(.system(size: isTotal ? 15 : 14, weight: isTotal ? .bold : .regular))
+                            .foregroundColor(isTotal ? .black : .gray)
                         Spacer()
                         Text(line.formatted)
-                            .font(.system(size: isSubtotal ? 15 : 14, weight: isSubtotal ? .bold : .regular))
-                            .foregroundColor(isSubtotal ? .green : .gray)
+                            .font(.system(size: isTotal ? 15 : 14, weight: isTotal ? .bold : .regular))
+                            .foregroundColor(isTotal ? .red : .gray)
                     }
                     .padding(.vertical, 4)
                 }
@@ -85,55 +82,28 @@ struct CartProductDetails: View {
                     Spacer()
                     Text(cart.total)
                         .font(.system(size: 15, weight: .bold))
-                        .foregroundColor(.green)
+                        .foregroundColor(.red)
                 }
                 .padding(.vertical, 4)
             }
 
             Spacer().frame(height: 12)
 
-            // MARK: Recommendations / Promo Cards
-            Divider().padding(.vertical, 8)
-            Text("You might also like")
-                .font(.system(size: 13, weight: .semibold))
-                .foregroundColor(.gray)
-                .padding(.bottom, 4)
+            // MARK: Recommendations 
             if !cart.recommendations.isEmpty {
+                Divider().padding(.vertical, 8)
+                Text("You might also like")
+                    .font(.system(size: 13, weight: .semibold))
+                    .foregroundColor(.gray)
+                    .padding(.bottom, 4)
                 ForEach(Array(cart.recommendations.enumerated()), id: \.offset) { _, props in
-                    PromoProductCardView(props: props) {
-                        onAccept?(props)
-                    }
-                    .padding(.bottom, 6)
-                }
-            }
-            /*else {
-                // Default promo products when recommendations are empty
-                ForEach(promoProducts, id: \Root.productID) { item in
-                    DefaultPromoCardView(item: item)
+                    PromoProductCardView(props: props)
                         .padding(.bottom, 6)
                 }
-            }*/
-            Spacer().frame(height: 8)
-
-            // MARK: Confirm Button
-            Button(action: { onConfirmed?() }) {
-                HStack {
-                    Spacer()
-                    Text("Confirmed")
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundColor(.white)
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.white)
-                        .font(.system(size: 13, weight: .semibold))
-                    Spacer()
-                }
-                .padding(.vertical, 14)
-                .background(Color.green)
-                .cornerRadius(12)
             }
         }
         .padding(16)
-        .background(Color(red: 0.91, green: 0.97, blue: 0.91))
+        .background(Color.white)
         .cornerRadius(20)
         .shadow(color: Color.black.opacity(0.08), radius: 8, x: 0, y: 4)
     }
@@ -144,7 +114,6 @@ struct CartProductDetails: View {
 struct OrderSummaryCard: View {
 
     var cart: CartDetail
-    var onProceedToPay: (() -> Void)? = nil
 
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
@@ -155,13 +124,13 @@ struct OrderSummaryCard: View {
                     Circle()
                         .fill(Color.red)
                         .frame(width: 36, height: 36)
-                    Image(systemName: "creditcard.fill")
+                    Image(systemName: "doc.text.fill")
                         .foregroundColor(.white)
                         .font(.system(size: 16, weight: .semibold))
                 }
 
                 VStack(alignment: .leading, spacing: 1) {
-                    Text("Order Summary")
+                    Text("Review your Order")
                         .font(.system(size: 16, weight: .bold))
                         .foregroundColor(.black)
                     Text("\(cart.productCount) \(cart.productCount == 1 ? "item" : "items")")
@@ -190,18 +159,18 @@ struct OrderSummaryCard: View {
             Divider()
                 .padding(.vertical, 10)
 
-            // MARK: Summary Lines from API (Total, Tax, Subtotal)
+            // MARK: Summary Lines from API (Subtotal, Tax, Total)
             if !cart.summaryLines.isEmpty {
                 ForEach(cart.summaryLines) { line in
-                    let isSubtotal = line.label.lowercased() == "subtotal"
+                    let isTotal = line.label.lowercased() == "total"
                     HStack {
                         Text(line.label)
-                            .font(.system(size: isSubtotal ? 15 : 14, weight: isSubtotal ? .bold : .regular))
-                            .foregroundColor(isSubtotal ? .black : .gray)
+                            .font(.system(size: isTotal ? 15 : 14, weight: isTotal ? .bold : .regular))
+                            .foregroundColor(isTotal ? .black : .gray)
                         Spacer()
                         Text(line.formatted)
-                            .font(.system(size: isSubtotal ? 15 : 14, weight: isSubtotal ? .bold : .regular))
-                            .foregroundColor(isSubtotal ? .red : .gray)
+                            .font(.system(size: isTotal ? 15 : 14, weight: isTotal ? .bold : .regular))
+                            .foregroundColor(isTotal ? .red : .gray)
                     }
                     .padding(.vertical, 4)
                 }
@@ -216,25 +185,6 @@ struct OrderSummaryCard: View {
                         .foregroundColor(.red)
                 }
                 .padding(.vertical, 4)
-            }
-
-            Spacer().frame(height: 16)
-
-            // MARK: Proceed to Pay Button
-            Button(action: { onProceedToPay?() }) {
-                HStack {
-                    Spacer()
-                    Text("Proceed to Pay")
-                        .font(.system(size: 15, weight: .semibold))
-                        .foregroundColor(.white)
-                    Image(systemName: "chevron.right")
-                        .foregroundColor(.white)
-                        .font(.system(size: 13, weight: .semibold))
-                    Spacer()
-                }
-                .padding(.vertical, 14)
-                .background(Color.red)
-                .cornerRadius(12)
             }
         }
         .padding(16)

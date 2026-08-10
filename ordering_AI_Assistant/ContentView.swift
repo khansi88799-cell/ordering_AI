@@ -10,24 +10,56 @@ import CoreData
 
 struct ContentView: View {
     @State private var isShowingChat = false
-    
+
     var body: some View {
-        VStack {
-            Text("Hello, Welcome to the AI Orders")
-            Button("Get Started") {
+        VStack(spacing: 24) {
+            Spacer()
+
+            GoldenArchesLogo()
+                .frame(width: 120, height: 120)
+
+            Text("Hello! Welcome to McDonald Food agent")
+                .font(.title2)
+                .fontWeight(.bold)
+                .foregroundColor(Color(hex: "#D7262B"))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal, 32)
+
+            Spacer()
+
+            Button {
                 navigateToChatWindow()
+            } label: {
+                Text("Get Started")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                    .frame(maxWidth: .infinity)
+                    .padding(.vertical, 14)
+                    .background(Color(hex: "#D7262B"))
+                    .cornerRadius(14)
             }
-            .buttonStyle(.borderedProminent)
+            .padding(.horizontal, 32)
+            .padding(.bottom, 40)
         }
+        .frame(maxWidth: .infinity, maxHeight: .infinity)
+        .background(Color(hex: "#FFF8E7").ignoresSafeArea())
         .fullScreenCover(isPresented: $isShowingChat) {
             OrderChatView()
         }
     }
-    
+
     func navigateToChatWindow() {
         isShowingChat = true
     }
-    
+
+}
+
+private struct GoldenArchesLogo: View {
+    var body: some View {
+        Image("M_logo")
+            .resizable()
+            .scaledToFit()
+    }
 }
 
 extension Color {

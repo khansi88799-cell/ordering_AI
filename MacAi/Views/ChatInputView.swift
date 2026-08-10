@@ -2,11 +2,12 @@
 //  ChatInputView.swift
 //  Arch
 //
-//  Created by Rahul Gupta on 24/06/26.
+//  Created by saeed on 24/06/26.
 //  Copyright © 2026 McDonald's. All rights reserved.
 //
 
 import SwiftUI
+import UIKit
 
 struct ChatInputView: View {
 
@@ -15,6 +16,9 @@ struct ChatInputView: View {
 
     @StateObject private var speechManager = SpeechRecognizerManager()
     @State private var isHoldingMic: Bool = false
+    @State private var showPermissionAlert: Bool = false
+    @State private var micStartFailed: Bool = false
+    @Environment(\.openURL) private var openURL
 
     var body: some View {
         VStack(spacing: 0) {
@@ -28,6 +32,19 @@ struct ChatInputView: View {
                         .foregroundColor(.red)
                         .lineLimit(1)
                         .truncationMode(.tail)
+                }
+                .padding(.horizontal, 16)
+                .padding(.vertical, 6)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .background(Color.red.opacity(0.08))
+                .transition(.move(edge: .top).combined(with: .opacity))
+            } else if micStartFailed {
+                HStack(spacing: 6) {
+                    Image(systemName: "exclamationmark.triangle")
+                        .foregroundColor(.red)
+                    Text("Couldn't start listening — try again")
+                        .font(.caption)
+                        .foregroundColor(.red)
                 }
                 .padding(.horizontal, 16)
                 .padding(.vertical, 6)
@@ -53,13 +70,26 @@ struct ChatInputView: View {
                     .gesture(
                         DragGesture(minimumDistance: 0)
                             .onChanged { _ in
-                                if !isHoldingMic {
-                                    isHoldingMic = true
+                                guard !isHoldingMic else { return }
+                                if speechManager.isAuthorized {
+                                    micStartFailed = false
                                     speechManager.transcribedText = ""
-                                    speechManager.startTranscribing()
+                                    if speechManager.startTranscribing() {
+                                        isHoldingMic = true
+                                    } else {
+                                        micStartFailed = true
+                                        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+                                            micStartFailed = false
+                                        }
+                                    }
+                                } else if speechManager.isPermissionDenied {
+                                    showPermissionAlert = true
+                                } else {
+                                    speechManager.refreshPermissionStatus()
                                 }
                             }
                             .onEnded { _ in
+                                guard isHoldingMic else { return }
                                 isHoldingMic = false
                                 speechManager.stopTranscribing()
                                 // Wait briefly for final transcription result
@@ -87,6 +117,16 @@ struct ChatInputView: View {
                 }
             }
             .padding()
+        }
+        .alert("Microphone Access Needed", isPresented: $showPermissionAlert) {
+            Button("Open Settings") {
+                if let url = URL(string: UIApplication.openSettingsURLString) {
+                    openURL(url)
+                }
+            }
+            Button("Cancel", role: .cancel) {}
+        } message: {
+            Text("Voice ordering needs Microphone and Speech Recognition access. Enable both for this app in Settings.")
         }
     }
 }

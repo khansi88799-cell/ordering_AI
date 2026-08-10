@@ -2,7 +2,7 @@
 //  ChatBubbleView.swift
 //  Arch
 //
-//  Created by Rahul Gupta on 24/06/26.
+//  Created by saeed on 4/08/26.
 //  Copyright © 2026 McDonald's. All rights reserved.
 //
 
@@ -27,9 +27,10 @@ struct ChatBubbleView: View {
                                 .frame(width: 35, height: 35)
                                 .clipShape(Circle())
                             
-                            Text("McDonald's Assistant")
+                            Text(message.senderName)
                                 .font(.caption)
-                                .foregroundColor(.gray)
+                                .fontWeight(.semibold)
+                                .foregroundColor(Color(hex: "#D7262B"))
                         }
                     }
                     messageContent
@@ -69,36 +70,14 @@ struct ChatBubbleView: View {
                 : Color.gray.opacity(0.15)
             )
             .cornerRadius(16)
-        case .products(let product):
-            VStack(alignment: .leading, spacing: 12) {
-                ProductCardView(
-                    product: product,
-                    onAdd: { newQty in
-                        viewModel.updateCart(product: product, quantity: newQty)
-                    },
-                    onRemove: { newQty in
-                        viewModel.updateCart(product: product, quantity: newQty)
-                    }
-                )
-            }
-            .padding(.vertical, 5)
+        case .products(let products):
+            RecommendedProductsCard(products: products)
         case .cart(let cart):
-            CartProductDetails(
-                cart: cart,
-                onConfirmed: {
-                    viewModel.isConfirmedTapped = true
-                    viewModel.appendOrderSummary(cart)
-                },
-                onAccept: { props in
-                    viewModel.addPromoToCart(props: props)
-                }
-            )
+            CartProductDetails(cart: cart)
         case .orderSummary(let cart):
-            OrderSummaryCard(cart: cart, onProceedToPay: {
-                viewModel.isProceedToPayTapped = true
-                viewModel.callOrderSummery(cart: cart)
-                //orderCardView(confirmation: confirmation)
-            })
+            OrderSummaryCard(cart: cart)
+        case .paymentDetails(let order):
+            PaymentDetailsCard(order: order)
         case .orderConfirmed(let confirmation):
             orderCardView(confirmation: confirmation)
         }

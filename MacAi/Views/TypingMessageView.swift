@@ -2,12 +2,12 @@
 //  TypingMessageView.swift
 //  SwiftUI-Concept
 //
-//  Created by Rahul Gupta on 26/06/26.
+//  Created by saeed on 24/06/26.
+//  Copyright © 2026 McDonald's. All rights reserved.
 //
 
 import SwiftUI
 
-// WhatsApp like typing animation response
 struct TypingMessageView: View {
     @ObservedObject var viewModel: ChatViewModel
 
@@ -16,14 +16,12 @@ struct TypingMessageView: View {
     var body: some View {
         HStack(alignment: .center, spacing: 8) {
 
-            // Smaller avatar
             Image("mAssistance")
                 .resizable()
                 .scaledToFit()
                 .frame(width: 35, height: 35)
                 .clipShape(Circle())
 
-            //Proper bubble
             HStack(spacing: 6) {
                 Text(viewModel.loadingMessage)
                     .font(.system(size: 14))
