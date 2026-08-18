@@ -8,8 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		079A2CA496EB4BA9A72A09D4 /* SpeechSynthesizerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E018B638BDA476990259544 /* SpeechSynthesizerManager.swift */; };
+		09955077F9AB4760805FAAD7 /* AudioStreamPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E157A43432DF4A2D83BBAAC2 /* AudioStreamPlayer.swift */; };
+		F91D5E9605AB4CD0A101D3E1 /* ChatAudioWebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F85101668D4B94B826C40B /* ChatAudioWebSocket.swift */; };
+		6A30EA4C34F241179C86A619 /* StaticAudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B5E3AB79B5C472FAF03EDF1 /* StaticAudioPlayer.swift */; };
 		30A8A09630234D32008B74D9 /* ChatAPIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A8A09530234D32008B74D9 /* ChatAPIModels.swift */; };
 		30A96BF9301F73B7008FECCA /* AgenticOrder.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 30A96BE4301F73B7008FECCA /* AgenticOrder.xcassets */; };
+		63BB8A5058554EEFBE37E61E /* greeting.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 8C1262EA51B949B78CE77207 /* greeting.mp3 */; };
+		0BF93FEB81EA4238B5E8A723 /* network_error.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = ECBC4C50B5C848B194E9DF88 /* network_error.mp3 */; };
 		30A96BFA301F73B7008FECCA /* ChatInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A96BF0301F73B7008FECCA /* ChatInputView.swift */; };
 		30A96BFB301F73B7008FECCA /* orderCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A96BF1301F73B7008FECCA /* orderCardView.swift */; };
 		30A96BFC301F73B7008FECCA /* CartProductDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30A96BEE301F73B7008FECCA /* CartProductDetails.swift */; };
@@ -69,6 +74,8 @@
 		30A96BC7301F427F008FECCA /* ordering_AI_AssistantTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ordering_AI_AssistantTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30A96BD1301F427F008FECCA /* ordering_AI_AssistantUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ordering_AI_AssistantUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		30A96BE4301F73B7008FECCA /* AgenticOrder.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AgenticOrder.xcassets; sourceTree = "<group>"; };
+		8C1262EA51B949B78CE77207 /* greeting.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = greeting.mp3; sourceTree = "<group>"; };
+		ECBC4C50B5C848B194E9DF88 /* network_error.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = network_error.mp3; sourceTree = "<group>"; };
 		30A96BE6301F73B7008FECCA /* ChatIntent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatIntent.swift; sourceTree = "<group>"; };
 		30A96BE7301F73B7008FECCA /* ChatMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		30A96BE8301F73B7008FECCA /* OrderProduct.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderProduct.swift; sourceTree = "<group>"; };
@@ -84,6 +91,9 @@
 		30A96BF6301F73B7008FECCA /* TypingMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypingMessageView.swift; sourceTree = "<group>"; };
 		30A96C09301F7489008FECCA /* AgenticOrdeingKMM.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = AgenticOrdeingKMM.xcframework; path = "../../../../KMM/Agentic-Ordering-Android/shared/build/XCFrameworks/release/AgenticOrdeingKMM.xcframework"; sourceTree = "<group>"; };
 		8E018B638BDA476990259544 /* SpeechSynthesizerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeechSynthesizerManager.swift; sourceTree = "<group>"; };
+		E157A43432DF4A2D83BBAAC2 /* AudioStreamPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioStreamPlayer.swift; sourceTree = "<group>"; };
+		E3F85101668D4B94B826C40B /* ChatAudioWebSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAudioWebSocket.swift; sourceTree = "<group>"; };
+		2B5E3AB79B5C472FAF03EDF1 /* StaticAudioPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticAudioPlayer.swift; sourceTree = "<group>"; };
 		BBA7D64919304C81BAFCE0BE /* ChatAPIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatAPIService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -157,6 +167,8 @@
 			isa = PBXGroup;
 			children = (
 				30A96BE4301F73B7008FECCA /* AgenticOrder.xcassets */,
+				8C1262EA51B949B78CE77207 /* greeting.mp3 */,
+				ECBC4C50B5C848B194E9DF88 /* network_error.mp3 */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -186,6 +198,9 @@
 				30A96BEC301F73B7008FECCA /* SpeechRecognizerManager.swift */,
 				BBA7D64919304C81BAFCE0BE /* ChatAPIService.swift */,
 				8E018B638BDA476990259544 /* SpeechSynthesizerManager.swift */,
+				E157A43432DF4A2D83BBAAC2 /* AudioStreamPlayer.swift */,
+				E3F85101668D4B94B826C40B /* ChatAudioWebSocket.swift */,
+				2B5E3AB79B5C472FAF03EDF1 /* StaticAudioPlayer.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -349,6 +364,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				30A96BF9301F73B7008FECCA /* AgenticOrder.xcassets in Resources */,
+				63BB8A5058554EEFBE37E61E /* greeting.mp3 in Resources */,
+				0BF93FEB81EA4238B5E8A723 /* network_error.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -389,6 +406,9 @@
 				30A96C07301F73B7008FECCA /* OrderProduct.swift in Sources */,
 				66FBAA3EF96B49CDBF1ABB18 /* ChatAPIService.swift in Sources */,
 				079A2CA496EB4BA9A72A09D4 /* SpeechSynthesizerManager.swift in Sources */,
+				09955077F9AB4760805FAAD7 /* AudioStreamPlayer.swift in Sources */,
+				F91D5E9605AB4CD0A101D3E1 /* ChatAudioWebSocket.swift in Sources */,
+				6A30EA4C34F241179C86A619 /* StaticAudioPlayer.swift in Sources */,
 				79ABFD02D82B468AA828B555 /* PaymentDetailsCard.swift in Sources */,
 				D34A43234A5341688337A839 /* RecommendedProductsCard.swift in Sources */,
 			);

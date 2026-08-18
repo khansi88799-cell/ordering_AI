@@ -83,13 +83,13 @@ final class SpeechSynthesizerManager: NSObject, ObservableObject {
         watchdogWorkItem?.cancel()
         guard !isRetry else { return }
         let workItem = DispatchWorkItem { [weak self] in
-            guard let self = self, !self.isSpeaking else { return }
+            guard let self = self, !self.isSpeaking, !self.synthesizer.isSpeaking else { return }
             print("Speech synthesizer appears stuck — resetting and retrying once.")
             self.resetSynthesizer()
             self.speak(text, language: language, isRetry: true)
         }
         watchdogWorkItem = workItem
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.5, execute: workItem)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.5, execute: workItem)
     }
 
     func stopSpeaking() {
@@ -99,12 +99,6 @@ final class SpeechSynthesizerManager: NSObject, ObservableObject {
         }
     }
 
-    /// iOS ships a robotic-sounding "default"-quality voice for every
-    /// language out of the box; "enhanced"/"premium" quality voices exist
-    /// for most languages but are opt-in downloads (Settings >
-    /// Accessibility > Spoken Content > Voices). Prefer one if the user
-    /// already has it installed — this is the single biggest lever for
-    /// less robotic speech available without a third-party TTS service.
     private static func bestAvailableVoice(for language: String) -> AVSpeechSynthesisVoice? {
         let candidates = AVSpeechSynthesisVoice.speechVoices().filter { $0.language == language }
         if #available(iOS 16.0, *), let premium = candidates.first(where: { $0.quality == .premium }) {

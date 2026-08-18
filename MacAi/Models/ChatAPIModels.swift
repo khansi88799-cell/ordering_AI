@@ -27,9 +27,11 @@ struct ChatAPIResponse: Decodable {
     let recommendationData: [APIProduct]
     let cartData: APICart?
     let orderData: APIOrder?
+    let traceId: String?
 
     private enum CodingKeys: String, CodingKey {
         case type, data, message
+        case traceId = "trace_id"
     }
 
     init(from decoder: Decoder) throws {
@@ -37,6 +39,7 @@ struct ChatAPIResponse: Decodable {
         let type = try container.decode(ChatResponseType.self, forKey: .type)
         self.type = type
         self.message = try container.decode(String.self, forKey: .message)
+        self.traceId = try container.decodeIfPresent(String.self, forKey: .traceId)
 
         switch type {
         case .recommendation:

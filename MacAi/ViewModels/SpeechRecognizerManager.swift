@@ -63,6 +63,8 @@ class SpeechRecognizerManager: ObservableObject {
         stopTranscribing()
         transcribedText = ""
         SpeechSynthesizerManager.shared.stopSpeaking()
+        AudioStreamPlayer.shared.stop()
+        StaticAudioPlayer.shared.stop()
         let audioSession = AVAudioSession.sharedInstance()
         do {
             try? audioSession.setActive(false, options: .notifyOthersOnDeactivation)

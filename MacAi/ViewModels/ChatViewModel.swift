@@ -26,18 +26,26 @@ class ChatViewModel: ObservableObject {
     @Published var isVoiceReplyEnabled: Bool = true
     private let apiService: ChatAPIService
     private let speechSynthesizer = SpeechSynthesizerManager.shared
+    private var audioWebSocket: ChatAudioWebSocket?
     private var lastOrderSnapshot: APIOrder?
 
     init(screenId: String, apiService: ChatAPIService = .shared) {
         self.apiService = apiService
+        audioWebSocket = ChatAudioWebSocket(userId: "U001")
+        audioWebSocket?.connect()
         initalBoatMsg()
+    }
+
+    deinit {
+        audioWebSocket?.disconnect()
     }
 
     // MARK: - Initial Bot Message
     func initalBoatMsg() {
-        let greeting = "Hi! I'm your Mcdonald Food Agent.Describe your perfect meal in your own words."
+        let greeting = "Hi! I'm your Mcdonald Food Agent. Describe your perfect meal in your own words."
         appendBotText(greeting)
-        speak(greeting)
+        guard isVoiceReplyEnabled else { return }
+        StaticAudioPlayer.shared.play(resourceName: "greeting", fallbackText: greeting)
     }
 
     // MARK: - User-Facing Actions
@@ -51,8 +59,11 @@ class ChatViewModel: ObservableObject {
 
     func toggleVoiceReply() {
         isVoiceReplyEnabled.toggle()
+        AudioStreamPlayer.shared.isMuted = !isVoiceReplyEnabled
         if !isVoiceReplyEnabled {
             speechSynthesizer.stopSpeaking()
+            AudioStreamPlayer.shared.stop()
+            StaticAudioPlayer.shared.stop()
         }
     }
 
@@ -69,7 +80,11 @@ class ChatViewModel: ObservableObject {
                     self.handle(response)
                 case .failure(let error):
                     self.errorMessage = error.localizedDescription
-                    self.appendBotText("Sorry, something went wrong. Please try again.")
+                    let errorText = "Sorry, something went wrong. Please try again."
+                    self.appendBotText(errorText)
+                    if self.isVoiceReplyEnabled {
+                        StaticAudioPlayer.shared.play(resourceName: "network_error", fallbackText: errorText)
+                    }
                 }
             }
         }
@@ -77,6 +92,9 @@ class ChatViewModel: ObservableObject {
 
     // MARK: - Response Handling
     private func handle(_ response: ChatAPIResponse) {
+        AudioStreamPlayer.shared.fallbackText = response.message
+        AudioStreamPlayer.shared.expectedTraceId = response.traceId
+
         switch response.type {
         case .recommendation:
             let popularID = topEarnPointsProductID(in: response.recommendationData)
@@ -85,14 +103,12 @@ class ChatViewModel: ObservableObject {
                 appendProducts(products)
             }
             appendBotText(response.message, agentName: Self.recommendationAgentName)
-            speak(response.message)
 
         case .cart:
             if let apiCart = response.cartData {
                 appendCart(mapAPICart(apiCart))
             }
             appendBotText(response.message, agentName: Self.cartAgentName)
-            speak(response.message)
 
         case .order:
             handleOrder(response)
@@ -108,7 +124,6 @@ class ChatViewModel: ObservableObject {
             lastOrderSnapshot = order
             messages.append(ChatMessage(type: .paymentDetails(order), time: currentTime(), sender: .bot))
             appendBotText(response.message, agentName: Self.orderAgentName)
-            speak(response.message)
             return
         }
         if !order.orderID.isEmpty {
@@ -118,7 +133,6 @@ class ChatViewModel: ObservableObject {
         lastOrderSnapshot = order
         messages.append(ChatMessage(type: .orderSummary(cartDetail(fromOrder: order)), time: currentTime(), sender: .bot))
         appendBotText(response.message, agentName: Self.orderAgentName)
-        speak(response.message)
     }
 
     private func finalizeOrder(message: String, order: APIOrder? = nil) {
@@ -137,7 +151,6 @@ class ChatViewModel: ObservableObject {
         )
         appendOrderConfirmed(confirmation)
         appendBotText(message, agentName: Self.orderAgentName)
-        speak(message)
         lastOrderSnapshot = nil
         clearCartOnServer()
     }
@@ -221,12 +234,6 @@ class ChatViewModel: ObservableObject {
 
     // MARK: - Loading Message
     let loadingMessage = "Thinking"
-
-    // MARK: - Text-to-Speech
-    private func speak(_ text: String) {
-        guard isVoiceReplyEnabled else { return }
-        speechSynthesizer.speak(text)
-    }
 
     // MARK: - Message Builders
     private func appendUserText(_ text: String) {
